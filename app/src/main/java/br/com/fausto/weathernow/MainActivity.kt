@@ -17,9 +17,8 @@ class MainActivity : AppCompatActivity() {
     lateinit var textCountry: EditText
     lateinit var textResult: TextView
     private val url = "http://api.openweathermap.org/data/2.5/weather"
-    private val appId = "1ea6be4b65bfb56a7976cf7a7da1eb52"
+    private val apiKey = BuildConfig.API_KEY
     var outPut: String = ""
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +27,6 @@ class MainActivity : AppCompatActivity() {
         textCity = findViewById(R.id.city)
         textCountry = findViewById(R.id.country)
         textResult = findViewById(R.id.result)
-
     }
 
     fun getWeather(view: View) {
@@ -40,9 +38,9 @@ class MainActivity : AppCompatActivity() {
             textResult.text = "City field is empty"
         } else {
             if (country == "") {
-                tempUrl = "$url?q=$city,$country&appid=$appId"
+                tempUrl = "$url?q=$city,$country&appid=$apiKey"
             } else {
-                tempUrl = "$url?q=$city&appid=$appId"
+                tempUrl = "$url?q=$city&appid=$apiKey"
             }
 
             val queue = Volley.newRequestQueue(this)
