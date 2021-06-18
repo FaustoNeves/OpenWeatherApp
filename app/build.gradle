@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+    id 'kotlin-android-extensions'
 }
 
 def localProperties = new Properties()
@@ -14,7 +15,7 @@ android {
 
     defaultConfig {
         applicationId "br.com.fausto.weathernow"
-        minSdkVersion 23
+        minSdkVersion 24
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -37,6 +38,12 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        viewBinding true
+    }
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -55,9 +62,6 @@ dependencies {
     //Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0'
-
-    //Volley
-    implementation 'com.android.volley:volley:1.1.1'
 
     //Retrofit
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
@@ -81,4 +85,6 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
     implementation "android.arch.lifecycle:extensions:1.1.1"
 
+    //Material Design
+    implementation "com.google.android.material:material:1.4.0-rc01"
 }

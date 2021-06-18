@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">WeatherNOW</string>
+    <string name="weather_now">Weather NOW</string>
+    <string name="city_name">City name</string>
+    <string name="country_code_optional">Country code (optional)</string>
+    <string name="get_weather">Get Weather</string>
 </resources>
