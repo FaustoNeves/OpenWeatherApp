@@ -8,9 +8,15 @@ import javax.inject.Inject
 
 class WeatherRemoteDataSourceImpl @Inject constructor(private val weatherService: WeatherService) :
     WeatherRemoteDatasource {
-    override suspend fun getWeather(cityName: String): Weather {
+    override suspend fun getWeatherByCityName(cityName: String): Weather {
         return withContext(Dispatchers.IO) {
-            weatherService.getCurrentWeather(cityName = cityName)
+            weatherService.getCurrentWeatherByCityName(cityName = cityName)
+        }
+    }
+
+    override suspend fun getWeatherByCoordinates(latitude: String, longitude: String): Weather {
+        return withContext(Dispatchers.IO) {
+            weatherService.getWeatherByCoordinates(latitude = latitude, longitude = longitude)
         }
     }
 }

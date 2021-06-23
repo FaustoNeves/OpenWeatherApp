@@ -58,7 +58,7 @@ class WeatherViewModel @Inject constructor(private val weatherRepository: Weathe
                 }
             viewModelScope.launch {
                 try {
-                    val weatherResult = weatherRepository.getWeather(searchValue!!)
+                    val weatherResult = weatherRepository.getWeatherByCityName(searchValue!!)
                     displayCityName.value = weatherResult.name
                     displayCountryName.value = weatherResult.sys!!.country
                     displayTemperature.value = (weatherResult.main!!.temp!! - 273.15).toString()

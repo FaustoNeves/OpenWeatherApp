@@ -26,6 +26,7 @@
             android:textSize="36sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            android:transitionName="main_logo_transition"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
@@ -158,5 +159,6 @@
                 </LinearLayout>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
