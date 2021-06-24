@@ -7,23 +7,15 @@
     android:orientation="vertical"
     tools:context=".ui.activity.SplashActivity">
 
-    <!--    <ImageView-->
-    <!--        android:id="@+id/main_image"-->
+<!--    <TextView-->
+    <!--        android:id="@+id/main_logo"-->
     <!--        android:layout_width="wrap_content"-->
     <!--        android:layout_height="wrap_content"-->
     <!--        android:layout_gravity="center"-->
-    <!--        android:src="@drawable/main_image" />-->
-
-    <TextView
-        android:id="@+id/main_logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="100sp"
-        android:fontFamily="@font/trade_winds"
-        android:gravity="center"
-        android:text="@string/weather_now"
-        android:textColor="@color/white"
-        android:textSize="76sp" />
-
+    <!--        android:layout_marginTop="100sp"-->
+    <!--        android:fontFamily="@font/trade_winds"-->
+    <!--        android:gravity="center"-->
+    <!--        android:text="@string/weather_now"-->
+    <!--        android:textColor="@color/white"-->
+    <!--        android:textSize="76sp" />-->
 </LinearLayout>

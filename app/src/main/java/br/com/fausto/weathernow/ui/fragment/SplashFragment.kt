@@ -1,53 +1,57 @@
-package br.com.fausto.weathernow.ui.activity
+package br.com.fausto.weathernow.ui.fragment
 
 import android.Manifest
-import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import android.widget.ImageView
 import android.widget.TextView
-import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import br.com.fausto.weathernow.R
-import br.com.fausto.weathernow.ui.viewmodel.SplashViewModel
+import br.com.fausto.weathernow.ui.viewmodel.WeatherViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-@AndroidEntryPoint
-class SplashActivity : AppCompatActivity() {
+@DelicateCoroutinesApi
+class SplashFragment : Fragment() {
 
-    private val splashViewModel: SplashViewModel by viewModels()
+    private val splashViewModel: WeatherViewModel by activityViewModels()
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     lateinit var mainLogo: TextView
-    lateinit var mainImage: ImageView
-    lateinit var sharedPreferences: SharedPreferences
-    lateinit var editor: SharedPreferences.Editor
 
-    @DelicateCoroutinesApi
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_splash, container, false)
+    }
 
-        setContentView(R.layout.activity_splash)
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-//        mainLogo = findViewById(R.id.main_logo)
-//        mainImage = findViewById(R.id.main_image)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
+        mainLogo = requireActivity().findViewById(R.id.main_logo)
         checkPermissions()
-//        sharedPreferences = getSharedPreferences("weather", Context.MODE_PRIVATE)
-//        editor = sharedPreferences.edit()
+//        val buttones = requireActivity().findViewById<Button>(R.id.buttones)
+//        buttones.setOnClickListener {
+//            findNavController().navigate(R.id.action_splashFragment_to_weatherFragment)
+//        }
+
     }
 
     private fun checkCoarseLocationPermission() =
         ActivityCompat.checkSelfPermission(
-            this,
+            requireContext(),
             Manifest.permission.ACCESS_COARSE_LOCATION
         ) == PackageManager.PERMISSION_GRANTED
 
@@ -58,27 +62,30 @@ class SplashActivity : AppCompatActivity() {
             permissionsRequest.add(Manifest.permission.ACCESS_COARSE_LOCATION)
         }
         if (permissionsRequest.isNotEmpty()) {
-            ActivityCompat.requestPermissions(this, permissionsRequest.toTypedArray(), 0)
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                permissionsRequest.toTypedArray(),
+                0
+            )
         } else if (permissionsRequest.isEmpty()) {
 //            startAnimation()
             fusedLocationClient.lastLocation
                 .addOnSuccessListener { location: Location? ->
                     location.let {
                         Log.e("location", location.toString())
-                        splashViewModel.getWeatherByCoordinates(
+                        val resposta = splashViewModel.getWeatherByCoordinates(
                             it!!.latitude.toString(),
                             it.longitude.toString()
                         )
-//                        editor.apply {
-//
-//                        }
+                        splashViewModel.salvarMensagem(resposta.toString())
                     }
                 }.addOnCompleteListener {
                     GlobalScope.launch {
                         Log.e("TAG", "is complete: ")
                         delay(1500)
-                        runOnUiThread {
+                        requireActivity().runOnUiThread {
 //                            goToMainActivity()
+                            findNavController().navigate(R.id.action_splashFragment_to_weatherFragment)
                         }
                     }
                 }
@@ -103,11 +110,11 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun startAnimation() {
-        mainLogo.startAnimation(AnimationUtils.loadAnimation(this, R.anim.bottom_to_original))
+        mainLogo.startAnimation(
+            AnimationUtils.loadAnimation(
+                requireContext(),
+                R.anim.bottom_to_original
+            )
+        )
     }
-
-//    private fun goToMainActivity() {
-//        val intent = Intent(this, MainActivity::class.java)
-//        startActivity(intent)
-//    }
 }

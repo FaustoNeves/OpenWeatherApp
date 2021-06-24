@@ -11,7 +11,7 @@ import javax.inject.Inject
 class SplashViewModel @Inject constructor(private val weatherRepository: WeatherRepository) :
     ViewModel() {
 
-    fun getWeather(latitude: String, longitude: String) {
+    fun getWeatherByCoordinates(latitude: String, longitude: String) {
         viewModelScope.launch {
             weatherRepository.getWeatherByCoordinates(latitude, longitude)
         }

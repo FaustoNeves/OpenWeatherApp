@@ -20,6 +20,13 @@ class WeatherViewModel @Inject constructor(private val weatherRepository: Weathe
     val message: LiveData<Event<String>>
         get() = statusMessage
 
+    val _mensagemTeste = MutableLiveData<String>()
+    val mensagemTeste: LiveData<String> = _mensagemTeste
+
+    fun salvarMensagem(mensagem: String) {
+        _mensagemTeste.value = mensagem
+    }
+
     @Bindable
     val cityName = MutableLiveData<String>()
 
@@ -71,6 +78,12 @@ class WeatherViewModel @Inject constructor(private val weatherRepository: Weathe
                 }
                 clearFields()
             }
+        }
+    }
+
+    fun getWeatherByCoordinates(latitude: String, longitude: String) {
+        viewModelScope.launch {
+            weatherRepository.getWeatherByCoordinates(latitude, longitude)
         }
     }
 

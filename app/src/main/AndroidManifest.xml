@@ -4,7 +4,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!--<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:name=".di.HiltApplication"
@@ -16,8 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WeatherNOW"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.activity.MainActivity" />
-        <activity android:name=".ui.activity.SplashActivity">
+        <activity android:name=".ui.activity.SplashActivity" />
+        <activity android:name=".ui.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
