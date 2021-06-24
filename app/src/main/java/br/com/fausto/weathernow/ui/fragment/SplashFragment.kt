@@ -1,6 +1,8 @@
 package br.com.fausto.weathernow.ui.fragment
 
 import android.Manifest
+import android.Manifest.permission.ACCESS_COARSE_LOCATION
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
@@ -10,7 +12,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -34,19 +38,17 @@ class SplashFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
+//        checkPermissions()
         return inflater.inflate(R.layout.fragment_splash, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
+//        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
         mainLogo = requireActivity().findViewById(R.id.main_logo)
-        checkPermissions()
-//        val buttones = requireActivity().findViewById<Button>(R.id.buttones)
-//        buttones.setOnClickListener {
-//            findNavController().navigate(R.id.action_splashFragment_to_weatherFragment)
-//        }
-
+//        checkPermissions()
+        validatePermissions()
     }
 
     private fun checkCoarseLocationPermission() =
@@ -69,26 +71,7 @@ class SplashFragment : Fragment() {
             )
         } else if (permissionsRequest.isEmpty()) {
 //            startAnimation()
-            fusedLocationClient.lastLocation
-                .addOnSuccessListener { location: Location? ->
-                    location.let {
-                        Log.e("location", location.toString())
-                        val resposta = splashViewModel.getWeatherByCoordinates(
-                            it!!.latitude.toString(),
-                            it.longitude.toString()
-                        )
-                        splashViewModel.salvarMensagem(resposta.toString())
-                    }
-                }.addOnCompleteListener {
-                    GlobalScope.launch {
-                        Log.e("TAG", "is complete: ")
-                        delay(1500)
-                        requireActivity().runOnUiThread {
-//                            goToMainActivity()
-                            findNavController().navigate(R.id.action_splashFragment_to_weatherFragment)
-                        }
-                    }
-                }
+            getWeather()
         }
     }
 
@@ -103,10 +86,34 @@ class SplashFragment : Fragment() {
             for (i in grantResults.indices) {
                 if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
 //                    startAnimation()
-                    checkPermissions()
+//                    checkPermissions()
                 }
             }
         }
+    }
+
+    @SuppressLint("MissingPermission")
+    fun getWeather() {
+        fusedLocationClient.lastLocation
+            .addOnSuccessListener { location: Location? ->
+                location.let {
+                    Log.e("location", location.toString())
+                    val resposta = splashViewModel.getWeatherByCoordinates(
+                        it!!.latitude.toString(),
+                        it.longitude.toString()
+                    )
+                    splashViewModel.salvarMensagem(resposta.toString())
+                }
+            }.addOnCompleteListener {
+                GlobalScope.launch {
+                    Log.e("TAG", "is complete: ")
+                    delay(1500)
+                    requireActivity().runOnUiThread {
+//                            goToMainActivity()
+                        findNavController().navigate(R.id.action_splashFragment_to_weatherFragment)
+                    }
+                }
+            }
     }
 
     private fun startAnimation() {
@@ -117,4 +124,34 @@ class SplashFragment : Fragment() {
             )
         )
     }
+
+    private fun validatePermissions() {
+        if (requireContext().let {
+                ContextCompat.checkSelfPermission(
+                    it,
+                    ACCESS_COARSE_LOCATION
+                )
+            } != PackageManager.PERMISSION_GRANTED) {
+            Log.e("TAG", "Request Permissions")
+            requestMultiplePermissions.launch(
+                arrayOf(ACCESS_COARSE_LOCATION)
+            )
+        } else {
+            Log.e("TAG", "Permission Already Granted")
+            getWeather()
+        }
+    }
+
+    private val requestMultiplePermissions =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+            permissions.entries.forEach {
+                Log.e("TAG", "${it.key} = ${it.value}")
+            }
+            if (permissions[ACCESS_COARSE_LOCATION] == true) {
+                getWeather()
+                Log.e("TAG", "Permission granted")
+            } else {
+                Log.e("TAG", "Permission not granted")
+            }
+        }
 }
