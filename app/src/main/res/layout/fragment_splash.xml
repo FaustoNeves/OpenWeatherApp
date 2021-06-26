@@ -1,33 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragment.SplashFragment">
+    android:background="@drawable/splash_background_color"
+    android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/splash_background"
-        android:orientation="vertical"
-        tools:context=".ui.activity.SplashActivity">
+    <TextView
+        android:id="@+id/main_logo1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="100sp"
+        android:fontFamily="@font/spicy_rice"
+        android:gravity="center"
+        android:text="@string/weather"
+        android:textColor="#CDCDCD"
+        android:textSize="76sp" />
 
-        <TextView
-            android:id="@+id/main_logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="100sp"
-            android:fontFamily="@font/trade_winds"
-            android:gravity="center"
-            android:text="@string/weather_now"
-            android:textColor="@color/white"
-            android:textSize="76sp" />
-
-        <Button
-            android:id="@+id/buttones"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Button" />
-    </LinearLayout>
-</FrameLayout>
+    <TextView
+        android:id="@+id/main_logo2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/spicy_rice"
+        android:gravity="center"
+        android:text="@string/now"
+        android:textColor="#FF8700"
+        android:textSize="90sp" />
+</LinearLayout>
