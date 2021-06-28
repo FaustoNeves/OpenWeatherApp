@@ -6,46 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragment.WeatherFragment">
 
-    <!--
-        <EditText
-            android:id="@+id/city"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:ems="10"
-            android:hint="@string/city_name"
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/country"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:ems="10"
-            android:hint="@string/country_code_optional"
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.842"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/city" />
-
-        <Button
-            android:id="@+id/getWeather"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="@string/get_weather"
-            android:textAllCaps="false"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.157"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/country" />
-            -->
-
     <TextView
         android:id="@+id/currentDate"
         android:layout_width="wrap_content"
@@ -142,5 +102,23 @@
         app:layout_constraintTop_toBottomOf="@+id/weatherImage"
         app:layout_constraintVertical_bias="0.702"
         tools:text="Clear" />
+
+    <LinearLayout
+        android:id="@+id/searchLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/searchAnotherPlace"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/search_for_another_region" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

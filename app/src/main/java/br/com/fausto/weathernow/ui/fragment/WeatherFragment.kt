@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
+import br.com.fausto.weathernow.R
 import br.com.fausto.weathernow.databinding.FragmentWeatherBinding
 import br.com.fausto.weathernow.ui.viewmodel.WeatherViewModel
 import kotlinx.android.synthetic.main.fragment_weather.*
@@ -49,6 +51,14 @@ class WeatherFragment : Fragment() {
                     maxWeather
             }
         })
+
+        bindingFragment.searchLayout.setOnClickListener {
+            navigateToSearchFragment()
+        }
+    }
+
+    private fun navigateToSearchFragment() {
+        findNavController().navigate(R.id.action_weatherFragment_to_searchRegionFragment)
     }
 
     override fun onDestroyView() {

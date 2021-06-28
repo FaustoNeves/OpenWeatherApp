@@ -37,74 +37,33 @@ class WeatherViewModel @Inject constructor(private val weatherRepository: Weathe
         _currentDate.value = dateInfo
     }
 
-    private val cityName = MutableLiveData<String>()
-
-    private val countryCode = MutableLiveData<String>()
-
-//    val displayCityName = MutableLiveData<String>()
-//
-//    val displayCountryName = MutableLiveData<String>()
-//
-//    val displayTemperature = MutableLiveData<String>()
-//
-//    val minTemp = MutableLiveData<String>()
-//
-//    val maxTemp = MutableLiveData<String>()
-//
-//    val humidity = MutableLiveData<String>()
-
-//    fun getWeatherByCityName() {
-//        if ((cityName.value == null) && (countryCode.value == null)) {
-//            statusMessage.value = Event("At least one parameter is required")
-//        } else {
-//            val searchValue: String? =
-//                if ((countryCode.value == null) && (cityName.value != null)) {
-//                    cityName.value
-//                } else if ((countryCode.value != null) && (cityName.value == null)) {
-//                    countryCode.value
-//                } else {
-//                    cityName.value + "," + countryCode.value
-//                }
-//            viewModelScope.launch {
-//                try {
-//                    val weatherResult = weatherRepository.getWeatherByCityName(searchValue!!)
-//                    displayCityName.value = weatherResult.name
-//                    displayCountryName.value = weatherResult.sys!!.country
-//                    displayTemperature.value = (weatherResult.main!!.temp!! - 273.15).toString()
-//                    minTemp.value = (weatherResult.main!!.temp_min!! - 273.15).toString()
-//                    maxTemp.value = (weatherResult.main!!.temp_max!! - 273.15).toString()
-//                    humidity.value =
-//                        "Humidity:" + (weatherResult.main!!.humidity!!).toString() + "%"
-//                } catch (exception: Exception) {
-//                    statusMessage.value = Event("Something went bad")
-//                }
-//                clearFields()
-//            }
-//        }
-//    }
+    suspend fun getWeatherByCityName(cityInput: String?, stateCodeInput: String?) {
+        if ((cityInput == null) && (stateCodeInput == null)) {
+            statusMessage.value = Event("At least one parameter is required")
+        } else {
+            val searchValue: String =
+                if ((stateCodeInput == null) && (cityInput != null)) {
+                    cityInput
+                } else if ((stateCodeInput != null) && (cityInput == null)) {
+                    stateCodeInput
+                } else {
+                    "$cityInput,$stateCodeInput"
+                }
+            viewModelScope.launch {
+                try {
+                    val weatherResult = weatherRepository.getWeatherByCityName(searchValue)
+                    getCurrentWeather(weatherResult)
+                } catch (exception: Exception) {
+                    statusMessage.value = Event("Something went bad")
+                }
+            }
+        }
+    }
 
     fun getWeatherByCoordinates(latitude: String, longitude: String) {
         viewModelScope.launch {
             val weatherResult = weatherRepository.getWeatherByCoordinates(latitude, longitude)
             getCurrentWeather(weatherResult)
-//            displayCityName.value = weatherResult.name!!
-//            displayCountryName.value = weatherResult.sys!!.country!!
-//            displayTemperature.value = (weatherResult.main!!.temp!! - 273.15).toString()
-//            minTemp.value = (weatherResult.main!!.temp_min!! - 273.15).toString()
-//            maxTemp.value = (weatherResult.main!!.temp_max!! - 273.15).toString()
-//            humidity.value =
-//                "Humidity:" + (weatherResult.main!!.humidity!!).toString() + "%"
         }
-    }
-
-//    fun getWeatherByCoordinates(latitude: String, longitude: String): Weather {
-//        return runBlocking {
-//            weatherRepository.getWeatherByCoordinates(latitude, longitude)
-//        }
-//    }
-
-    private fun clearFields() {
-        cityName.value = ""
-        countryCode.value = ""
     }
 }

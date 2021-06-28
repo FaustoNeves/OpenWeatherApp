@@ -18,5 +18,18 @@
         android:id="@+id/weatherFragment"
         android:name="br.com.fausto.weathernow.ui.fragment.WeatherFragment"
         android:label="fragment_weather"
-        tools:layout="@layout/fragment_weather" />
+        tools:layout="@layout/fragment_weather">
+        <action
+            android:id="@+id/action_weatherFragment_to_searchRegionFragment"
+            app:destination="@id/searchRegionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchRegionFragment"
+        android:name="br.com.fausto.weathernow.ui.fragment.SearchRegionFragment"
+        android:label="fragment_search_region"
+        tools:layout="@layout/fragment_search_region">
+        <action
+            android:id="@+id/action_searchRegionFragment_to_weatherFragment"
+            app:destination="@id/weatherFragment" />
+    </fragment>
 </navigation>

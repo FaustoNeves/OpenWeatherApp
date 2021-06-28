@@ -1,6 +1,6 @@
 package br.com.fausto.weathernow.ui.fragment
 
-import android.Manifest.permission.ACCESS_COARSE_LOCATION
+import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.location.Location
@@ -11,8 +11,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -50,46 +50,6 @@ class SplashFragment : Fragment() {
         validatePermissions()
     }
 
-    private fun checkCoarseLocationPermission() =
-        ActivityCompat.checkSelfPermission(
-            requireContext(),
-            ACCESS_COARSE_LOCATION
-        ) == PackageManager.PERMISSION_GRANTED
-
-    @DelicateCoroutinesApi
-    private fun checkPermissions() {
-        val permissionsRequest = mutableListOf<String>()
-        if (!checkCoarseLocationPermission()) {
-            permissionsRequest.add(ACCESS_COARSE_LOCATION)
-        }
-        if (permissionsRequest.isNotEmpty()) {
-            ActivityCompat.requestPermissions(
-                requireActivity(),
-                permissionsRequest.toTypedArray(),
-                0
-            )
-        } else if (permissionsRequest.isEmpty()) {
-//            displayAnimation()
-            getWeather()
-        }
-    }
-
-    @DelicateCoroutinesApi
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == 0 && grantResults.isNotEmpty()) {
-            for (i in grantResults.indices) {
-                if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
-//                    displayAnimation()
-                }
-            }
-        }
-    }
-
     @SuppressLint("MissingPermission")
     fun getWeather() {
         fusedLocationClient.lastLocation
@@ -103,7 +63,6 @@ class SplashFragment : Fragment() {
                 }
             }.addOnCompleteListener {
                 GlobalScope.launch {
-                    Log.e("TAG", "is complete: ")
                     delay(1500)
                     requireActivity().runOnUiThread {
                         findNavController().navigate(R.id.action_splashFragment_to_weatherFragment)
@@ -116,16 +75,13 @@ class SplashFragment : Fragment() {
         if (requireContext().let {
                 ContextCompat.checkSelfPermission(
                     it,
-                    ACCESS_COARSE_LOCATION
+                    ACCESS_FINE_LOCATION
                 )
             } != PackageManager.PERMISSION_GRANTED) {
-            Log.e("TAG", "Request Permissions")
             requestMultiplePermissions.launch(
-                arrayOf(ACCESS_COARSE_LOCATION)
+                arrayOf(ACCESS_FINE_LOCATION)
             )
         } else {
-            Log.e("TAG", "Permission Already Granted")
-//            displayAnimation()
             getWeather()
         }
     }
@@ -133,15 +89,15 @@ class SplashFragment : Fragment() {
     private val requestMultiplePermissions =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
             permissions.entries.forEach {
-                Log.e("TAG", "${it.key} = ${it.value}")
             }
-            if (permissions[ACCESS_COARSE_LOCATION] == true) {
+            if (permissions[ACCESS_FINE_LOCATION] == true) {
                 getWeather()
-//                displayAnimation()
-                Log.e("TAG", "Permission granted")
             } else {
-//                displayAnimation()
-                Log.e("TAG", "Permission not granted")
+                Toast.makeText(
+                    requireContext(),
+                    "The app needs location permission to work",
+                    Toast.LENGTH_LONG
+                ).show()
             }
         }
 

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/splash_background_color"
+    android:orientation="vertical"
+    tools:context=".ui.fragment.SearchRegionFragment">
+
+    <TextView
+        android:id="@+id/main_logo1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="100sp"
+        android:fontFamily="@font/spicy_rice"
+        android:gravity="center"
+        android:text="@string/weather"
+        android:textColor="@color/grey"
+        android:textSize="76sp" />
+
+    <TextView
+        android:id="@+id/main_logo2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/spicy_rice"
+        android:gravity="center"
+        android:text="@string/now"
+        android:textColor="@color/orange_deep"
+        android:textSize="90sp" />
+
+    <EditText
+        android:id="@+id/cityRegionName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="50sp"
+        android:layout_marginEnd="20dp"
+        android:backgroundTint="@color/orange_deep"
+        android:ems="10"
+        android:hint="@string/city_region_name"
+        android:inputType="textPersonName"
+        android:textColor="@color/white"
+        android:textColorHint="@color/orange_deep" />
+
+    <EditText
+        android:id="@+id/countryCode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20sp"
+        android:layout_marginEnd="20dp"
+        android:backgroundTint="@color/orange_deep"
+        android:ems="10"
+        android:hint="@string/state_code"
+        android:inputType="textPersonName"
+        android:textColor="@color/orange_deep"
+        android:textColorHint="@color/orange_deep" />
+
+    <Button
+        android:id="@+id/getWeather"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="65sp"
+        android:layout_marginEnd="20dp"
+        android:backgroundTint="@color/orange_deep"
+        android:text="@string/get_weather"
+        android:textAllCaps="false"
+        android:textColor="@color/black" />
+</LinearLayout>
