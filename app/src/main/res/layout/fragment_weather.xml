@@ -50,10 +50,12 @@
         android:id="@+id/currentDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="100dp"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="18:30:00 18/04/1999" />
@@ -70,11 +72,11 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/currentDate"
-        app:layout_constraintVertical_bias="0.143"
+        app:layout_constraintVertical_bias="0.025"
         tools:text="Liberdade" />
 
     <TextView
-        android:id="@+id/currentWeather"
+        android:id="@+id/currentWeatherText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
@@ -89,26 +91,26 @@
         tools:text="24°" />
 
     <TextView
-        android:id="@+id/maxWeather"
+        android:id="@+id/maxWeatherText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="100dp"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/currentWeather"
+        app:layout_constraintTop_toBottomOf="@+id/currentWeatherText"
         app:layout_constraintVertical_bias="0.106"
         tools:text="26°" />
 
     <TextView
-        android:id="@+id/minWeather"
+        android:id="@+id/minWeatherText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/currentWeather"
+        app:layout_constraintTop_toBottomOf="@+id/currentWeatherText"
         app:layout_constraintVertical_bias="0.106"
         tools:text="21°" />
 
@@ -118,7 +120,7 @@
         android:layout_height="100sp"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
-        app:layout_constraintBottom_toTopOf="@+id/currentWeather"
+        app:layout_constraintBottom_toTopOf="@+id/currentWeatherText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.481"
         app:layout_constraintStart_toStartOf="parent"
@@ -133,7 +135,7 @@
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
         android:textSize="48sp"
-        app:layout_constraintBottom_toTopOf="@+id/currentWeather"
+        app:layout_constraintBottom_toTopOf="@+id/currentWeatherText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.46"
         app:layout_constraintStart_toStartOf="parent"

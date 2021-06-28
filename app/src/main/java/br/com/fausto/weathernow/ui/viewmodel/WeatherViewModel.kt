@@ -1,6 +1,6 @@
 package br.com.fausto.weathernow.ui.viewmodel
 
-import androidx.databinding.Observable
+import android.icu.util.Calendar
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,11 +10,12 @@ import br.com.fausto.weathernow.http.weatherapi.response.Weather
 import br.com.fausto.weathernow.ui.utils.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import java.text.DateFormat
 import javax.inject.Inject
 
 @HiltViewModel
 class WeatherViewModel @Inject constructor(private val weatherRepository: WeatherRepository) :
-    ViewModel(), Observable {
+    ViewModel() {
 
     private val statusMessage = MutableLiveData<Event<String>>()
     val message: LiveData<Event<String>>
@@ -23,25 +24,34 @@ class WeatherViewModel @Inject constructor(private val weatherRepository: Weathe
     private val _weather = MutableLiveData<Weather>()
     val weather: LiveData<Weather> = _weather
 
-    fun getCurrentWeather(currentWeather: Weather) {
+    private fun getCurrentWeather(currentWeather: Weather) {
         _weather.value = currentWeather
     }
 
-    val cityName = MutableLiveData<String>()
+    private val calendar = Calendar.getInstance()
+    private val dateInfo: String = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.time)
+    private val _currentDate = MutableLiveData<String>()
+    val currentDate: LiveData<String> = _currentDate
 
-    val countryCode = MutableLiveData<String>()
+    init {
+        _currentDate.value = dateInfo
+    }
 
-    val displayCityName = MutableLiveData<String>()
+    private val cityName = MutableLiveData<String>()
 
-    val displayCountryName = MutableLiveData<String>()
+    private val countryCode = MutableLiveData<String>()
 
-    val displayTemperature = MutableLiveData<String>()
-
-    val minTemp = MutableLiveData<String>()
-
-    val maxTemp = MutableLiveData<String>()
-
-    val humidity = MutableLiveData<String>()
+//    val displayCityName = MutableLiveData<String>()
+//
+//    val displayCountryName = MutableLiveData<String>()
+//
+//    val displayTemperature = MutableLiveData<String>()
+//
+//    val minTemp = MutableLiveData<String>()
+//
+//    val maxTemp = MutableLiveData<String>()
+//
+//    val humidity = MutableLiveData<String>()
 
 //    fun getWeatherByCityName() {
 //        if ((cityName.value == null) && (countryCode.value == null)) {
@@ -96,11 +106,5 @@ class WeatherViewModel @Inject constructor(private val weatherRepository: Weathe
     private fun clearFields() {
         cityName.value = ""
         countryCode.value = ""
-    }
-
-    override fun addOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {
-    }
-
-    override fun removeOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {
     }
 }
