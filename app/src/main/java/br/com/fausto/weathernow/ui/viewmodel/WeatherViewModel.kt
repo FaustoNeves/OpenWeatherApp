@@ -1,6 +1,6 @@
 package br.com.fausto.weathernow.ui.viewmodel
 
-import android.icu.util.Calendar
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,7 +10,6 @@ import br.com.fausto.weathernow.http.weatherapi.response.Weather
 import br.com.fausto.weathernow.ui.utils.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import java.text.DateFormat
 import javax.inject.Inject
 
 @HiltViewModel
@@ -28,25 +27,25 @@ class WeatherViewModel @Inject constructor(private val weatherRepository: Weathe
         _weather.value = currentWeather
     }
 
-    private val calendar = Calendar.getInstance()
-    private val dateInfo: String = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.time)
-    private val _currentDate = MutableLiveData<String>()
-    val currentDate: LiveData<String> = _currentDate
-
-    init {
-        _currentDate.value = dateInfo
-    }
+//    private val calendar = Calendar.getInstance()
+//    private val dateInfo: String = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.time)
+//    private val _currentDate = MutableLiveData<String>()
+//    val currentDate: LiveData<String> = _currentDate
+//    init {
+//        _currentDate.value = dateInfo
+//    }
 
     suspend fun getWeatherByCityName(cityInput: String?, stateCodeInput: String?) {
         if ((cityInput == null) && (stateCodeInput == null)) {
             statusMessage.value = Event("At least one parameter is required")
         } else {
             val searchValue: String =
-                if ((stateCodeInput == null) && (cityInput != null)) {
+                if ((stateCodeInput?.isEmpty()!!) && (cityInput?.isNotEmpty()!!)) {
                     cityInput
-                } else if ((stateCodeInput != null) && (cityInput == null)) {
+                } else if ((stateCodeInput.isNotEmpty()) && (cityInput?.isEmpty()!!)) {
                     stateCodeInput
                 } else {
+                    Log.e("cityInput", cityInput.toString())
                     "$cityInput,$stateCodeInput"
                 }
             viewModelScope.launch {

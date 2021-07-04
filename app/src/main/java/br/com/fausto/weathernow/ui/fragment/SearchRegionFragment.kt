@@ -54,8 +54,8 @@ class SearchRegionFragment : Fragment() {
     }
 
     private suspend fun getWeatherByCityRegionName(
-        cityNameRegionName: String,
-        countryCode: String
+        cityNameRegionName: String?,
+        countryCode: String?
     ) {
         splashViewModel.getWeatherByCityName(cityNameRegionName, countryCode)
     }

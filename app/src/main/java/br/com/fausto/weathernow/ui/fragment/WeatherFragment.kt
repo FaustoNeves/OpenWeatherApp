@@ -1,5 +1,6 @@
 package br.com.fausto.weathernow.ui.fragment
 
+import android.icu.text.DecimalFormat
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +12,6 @@ import br.com.fausto.weathernow.R
 import br.com.fausto.weathernow.databinding.FragmentWeatherBinding
 import br.com.fausto.weathernow.ui.viewmodel.WeatherViewModel
 import kotlinx.android.synthetic.main.fragment_weather.*
-import java.text.DecimalFormat
 
 class WeatherFragment : Fragment() {
 
@@ -30,25 +30,18 @@ class WeatherFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        splashViewModel.currentDate.observe(viewLifecycleOwner, {
-            bindingFragment.currentDate.text = it
-        })
+//        splashViewModel.currentDate.observe(viewLifecycleOwner, {
+//            bindingFragment.currentDate.text = it
+//        })
 
         splashViewModel.weather.observe(viewLifecycleOwner, { weather ->
             bindingFragment.let {
                 regionName.text = weather.name
                 weatherStatus.text = weather.weather!![0].description
-                val df = DecimalFormat("#")
-                val currentWeather =
-                    df.format(weather.main!!.temp!! - 273.15).toString() + "°C"
-                currentWeatherText.text = currentWeather
-                val minWeather =
-                    df.format(weather.main!!.temp_min!! - 273.15).toString() + "°C"
-                minWeatherText.text = minWeather
-                val maxWeather =
-                    df.format(weather.main!!.temp_max!! - 273.15).toString() + "°C"
-                maxWeatherText.text =
-                    maxWeather
+                currentWeatherText.text = decimalToCelsius(weather.main?.temp)
+                minWeatherText.text = decimalToCelsius(weather.main?.temp_max)
+                maxWeatherText.text = decimalToCelsius(weather.main?.temp_min)
+                countryAbbreviation.text = weather.sys?.country
             }
         })
 
@@ -64,5 +57,10 @@ class WeatherFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _bindingFragment = null
+    }
+
+    private fun decimalToCelsius(doubleText: Double?): String {
+        val df = DecimalFormat("#")
+        return df.format(doubleText?.minus(273.15)).toString() + "°C"
     }
 }

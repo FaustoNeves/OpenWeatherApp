@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragment.WeatherFragment">
 
-    <TextView
+    <!--<TextView
         android:id="@+id/currentDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,7 +18,20 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="18:30:00 18/04/1999" />
+        tools:text="18:30:00 18/04/1999" />-->
+
+    <TextView
+        android:id="@+id/countryAbbreviation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/spicy_rice"
+        android:textSize="28sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="BR" />
 
     <TextView
         android:id="@+id/regionName"
@@ -26,13 +39,13 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:fontFamily="@font/spicy_rice"
-        android:textSize="60sp"
+        android:textSize="48sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.453"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/currentDate"
-        app:layout_constraintVertical_bias="0.025"
+        app:layout_constraintTop_toBottomOf="@+id/countryAbbreviation"
+        app:layout_constraintVertical_bias="0.0"
         tools:text="Liberdade" />
 
     <TextView
@@ -41,12 +54,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
-        android:layout_marginBottom="224dp"
+        android:layout_marginBottom="308dp"
         android:gravity="center"
-        android:textSize="72sp"
+        android:textSize="99sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.467"
+        app:layout_constraintHorizontal_bias="0.456"
         app:layout_constraintStart_toStartOf="parent"
         tools:text="24°" />
 
@@ -54,11 +67,13 @@
         android:id="@+id/maxWeatherText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="100dp"
-        android:textSize="30sp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="200dp"
+        android:textSize="36sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/currentWeatherText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/weatherStatus"
         app:layout_constraintVertical_bias="0.106"
         tools:text="26°" />
 
@@ -66,11 +81,13 @@
         android:id="@+id/minWeatherText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:textSize="30sp"
+        android:layout_marginStart="200dp"
+        android:layout_marginEnd="50dp"
+        android:textSize="36sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/currentWeatherText"
+        app:layout_constraintTop_toBottomOf="@+id/weatherStatus"
         app:layout_constraintVertical_bias="0.106"
         tools:text="21°" />
 
@@ -93,14 +110,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="50dp"
-        android:textSize="48sp"
-        app:layout_constraintBottom_toTopOf="@+id/currentWeatherText"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.46"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/weatherImage"
-        app:layout_constraintVertical_bias="0.702"
+        app:layout_constraintTop_toBottomOf="@+id/currentWeatherText"
         tools:text="Clear" />
 
     <LinearLayout
