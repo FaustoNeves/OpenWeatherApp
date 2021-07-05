@@ -102,5 +102,5 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
     //Lottie
-    implementation "com.airbnb.android:lottie:2.6.0-beta19"
+    implementation "com.airbnb.android:lottie:3.7.0"
 }
