@@ -21,13 +21,13 @@
         tools:text="18:30:00 18/04/1999" />-->
 
     <com.airbnb.lottie.LottieAnimationView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:id="@+id/weatherAnimation"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:lottie_rawRes="@raw/animationtest"
         app:lottie_autoPlay="true"
         app:lottie_loop="true" />
 
@@ -68,6 +68,7 @@
         android:layout_marginBottom="308dp"
         android:gravity="center"
         android:textSize="99sp"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.456"
