@@ -2,6 +2,7 @@ package br.com.fausto.weathernow.ui.fragment
 
 import android.icu.text.DecimalFormat
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,6 +38,7 @@ class WeatherFragment : Fragment() {
         splashViewModel.weather.observe(viewLifecycleOwner, { weather ->
             bindingFragment.let {
                 weather.weather!![0].let {
+                    Log.e("weather", "weather: $it.main!!, day/night: ${it.icon}")
                     if (it.main.equals("Thunderstorm")) {
                         if (checkLastCharacterForD(it.icon)!!) {
                             bindingFragment.weatherAnimation.setAnimation(R.raw.heavy_rain)
@@ -68,6 +70,7 @@ class WeatherFragment : Fragment() {
                             bindingFragment.weatherAnimation.setAnimation(R.raw.night_cloud)
                         }
                     } else {
+                        Log.e("mist", "mist")
                         bindingFragment.weatherAnimation.setAnimation(R.raw.mist)
                     }
                 }
