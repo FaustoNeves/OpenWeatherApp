@@ -16,8 +16,7 @@ class WeatherViewModel @Inject constructor(private val weatherRepository: Weathe
     ViewModel() {
 
     private val statusMessage = MutableLiveData<Event<String>>()
-    val message: LiveData<Event<String>>
-        get() = statusMessage
+    val message: LiveData<Event<String>> = statusMessage
 
     private val _weather = MutableLiveData<Weather>()
     val weather: LiveData<Weather> = _weather
@@ -25,6 +24,9 @@ class WeatherViewModel @Inject constructor(private val weatherRepository: Weathe
     private fun getCurrentWeather(currentWeather: Weather) {
         _weather.value = currentWeather
     }
+
+    private val _statusRequest = MutableLiveData(false)
+    val statusRequest: LiveData<Boolean> = _statusRequest
 
 //    private val calendar = Calendar.getInstance()
 //    private val dateInfo: String = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.time)
@@ -35,24 +37,23 @@ class WeatherViewModel @Inject constructor(private val weatherRepository: Weathe
 //    }
 
     suspend fun getWeatherByCityName(cityInput: String?, stateCodeInput: String?) {
-        if ((cityInput == null) && (stateCodeInput == null)) {
+        if (cityInput!!.isEmpty() && stateCodeInput!!.isEmpty()) {
             statusMessage.value = Event("At least one parameter is required")
         } else {
             val searchValue: String =
-                if ((stateCodeInput?.isEmpty()!!) && (cityInput?.isNotEmpty()!!)) {
+                if ((stateCodeInput?.isEmpty()!!) && (cityInput.isNotEmpty())) {
                     cityInput
-                } else if ((stateCodeInput.isNotEmpty()) && (cityInput?.isEmpty()!!)) {
+                } else if ((stateCodeInput.isNotEmpty()) && (cityInput.isEmpty())) {
                     stateCodeInput
                 } else {
                     "$cityInput,$stateCodeInput"
                 }
-            viewModelScope.launch {
-                try {
-                    val weatherResult = weatherRepository.getWeatherByCityName(searchValue)
-                    getCurrentWeather(weatherResult)
-                } catch (exception: Exception) {
-                    statusMessage.value = Event("No results found!")
-                }
+            try {
+                val weatherResult = weatherRepository.getWeatherByCityName(searchValue)
+                getCurrentWeather(weatherResult)
+                _statusRequest.value = true
+            } catch (exception: Exception) {
+                statusMessage.value = Event("No results found")
             }
         }
     }

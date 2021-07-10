@@ -41,15 +41,17 @@ class SearchRegionFragment : Fragment() {
         })
 
         bindingFragment.getWeather.setOnClickListener {
-            val job = GlobalScope.launch(Dispatchers.Main) {
+            GlobalScope.launch(Dispatchers.Main) {
                 getWeatherByCityRegionName(
                     bindingFragment.cityRegionName.text.toString(),
                     bindingFragment.countryCode.text.toString()
                 )
             }
-            job.invokeOnCompletion {
-                navigateBack()
-            }
+                .invokeOnCompletion {
+                    if (splashViewModel.statusRequest.value!!) {
+                        navigateBack()
+                    }
+                }
         }
     }
 
