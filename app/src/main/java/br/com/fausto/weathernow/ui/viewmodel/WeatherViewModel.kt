@@ -1,6 +1,5 @@
 package br.com.fausto.weathernow.ui.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -45,7 +44,6 @@ class WeatherViewModel @Inject constructor(private val weatherRepository: Weathe
                 } else if ((stateCodeInput.isNotEmpty()) && (cityInput?.isEmpty()!!)) {
                     stateCodeInput
                 } else {
-                    Log.e("cityInput", cityInput.toString())
                     "$cityInput,$stateCodeInput"
                 }
             viewModelScope.launch {
@@ -53,7 +51,7 @@ class WeatherViewModel @Inject constructor(private val weatherRepository: Weathe
                     val weatherResult = weatherRepository.getWeatherByCityName(searchValue)
                     getCurrentWeather(weatherResult)
                 } catch (exception: Exception) {
-                    statusMessage.value = Event("Something went bad")
+                    statusMessage.value = Event("No results found!")
                 }
             }
         }
