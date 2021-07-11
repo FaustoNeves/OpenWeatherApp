@@ -36,38 +36,56 @@ class WeatherFragment : Fragment() {
 //            bindingFragment.currentDate.text = it
 //        })
         splashViewModel.weather.observe(viewLifecycleOwner, { weather ->
-            bindingFragment.let {
+            bindingFragment.let { binding ->
                 weather.weather!![0].let {
                     Log.e("weather", "weather: $it.main!!, day/night: ${it.icon}")
                     when (it.main) {
                         "Thunderstorm" -> if (checkLastCharacterForD(it.icon)!!) {
                             setAnimationResource(R.raw.heavy_rain)
-                        } else {
-                            setAnimationResource(R.raw.heavy_rain)
+                            setBackgroundColor(R.drawable.thunderstorm_background)
+                            setTextColor(R.color.white)
                         }
                         "Drizzle", "Rain" -> if (checkLastCharacterForD(it.icon)!!) {
                             setAnimationResource(R.raw.day_rain)
+                            setBackgroundColor(R.drawable.snow_day_background)
+                            setTextColor(R.color.black)
                         } else {
                             setAnimationResource(R.raw.night_rain)
+                            setBackgroundColor(R.drawable.snow_night_background)
+                            setTextColor(R.color.white)
                         }
                         "Snow" -> if (checkLastCharacterForD(it.icon)!!) {
                             setAnimationResource(R.raw.day_snow)
+                            setBackgroundColor(R.drawable.snow_day_background)
+                            setTextColor(R.color.black)
                         } else {
                             setAnimationResource(R.raw.night_snow)
+                            setBackgroundColor(R.drawable.snow_night_background)
+                            setTextColor(R.color.white)
                         }
                         "Clear" -> if (checkLastCharacterForD(it.icon)!!) {
                             setAnimationResource(R.raw.day_clean)
-                            setBackground(R.drawable.sunny_background)
+                            setBackgroundColor(R.drawable.sunny_background)
+                            setTextColor(R.color.white)
                         } else {
                             setAnimationResource(R.raw.night_clean)
-                            setBackground(R.drawable.clean_night_background)
+                            setBackgroundColor(R.drawable.clean_night_background)
+                            setTextColor(R.color.white)
                         }
                         "Clouds" -> if (checkLastCharacterForD(it.icon)!!) {
                             setAnimationResource(R.raw.day_cloud)
+                            setBackgroundColor(R.drawable.cloud_day_background)
+                            setTextColor(R.color.white)
                         } else {
                             setAnimationResource(R.raw.night_cloud)
+                            setBackgroundColor(R.drawable.clean_night_background)
+                            setTextColor(R.color.white)
                         }
-                        else -> setAnimationResource(R.raw.mist)
+                        else -> {
+                            setAnimationResource(R.raw.mist)
+                            setBackgroundColor(R.drawable.mist_background)
+                            setTextColor(R.color.white)
+                        }
                     }
                 }
                 regionName.text = weather.name
@@ -104,11 +122,34 @@ class WeatherFragment : Fragment() {
 
     private fun checkLastCharacterForD(stringSequence: String?) = stringSequence?.endsWith("d")
 
-    private fun setBackground(drawableResource: Int) {
+    private fun setBackgroundColor(drawableResource: Int) {
         bindingFragment.mainLayout.background = ResourcesCompat.getDrawable(
             resources,
             drawableResource,
             null
         )
+    }
+
+    private fun setTextColor(drawableResource: Int) {
+        bindingFragment.countryAbbreviation.setTextColor(
+            resources.getColor(
+                drawableResource,
+                null
+            )
+        )
+        bindingFragment.let {
+            countryAbbreviation.setTextColor(
+                resources.getColor(
+                    drawableResource,
+                    null
+                )
+            )
+            regionName.setTextColor(
+                resources.getColor(
+                    drawableResource,
+                    null
+                )
+            )
+        }
     }
 }

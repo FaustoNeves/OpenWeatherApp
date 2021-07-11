@@ -25,7 +25,7 @@ class WeatherViewModel @Inject constructor(private val weatherRepository: Weathe
         _weather.value = currentWeather
     }
 
-    private val _statusRequest = MutableLiveData(false)
+    private val _statusRequest = MutableLiveData<Boolean>()
     val statusRequest: LiveData<Boolean> = _statusRequest
 
 //    private val calendar = Calendar.getInstance()
@@ -37,6 +37,7 @@ class WeatherViewModel @Inject constructor(private val weatherRepository: Weathe
 //    }
 
     suspend fun getWeatherByCityName(cityInput: String?, stateCodeInput: String?) {
+        _statusRequest.value = false
         if (cityInput!!.isEmpty() && stateCodeInput!!.isEmpty()) {
             statusMessage.value = Event("At least one parameter is required")
         } else {
