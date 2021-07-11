@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -56,8 +57,10 @@ class WeatherFragment : Fragment() {
                         }
                         "Clear" -> if (checkLastCharacterForD(it.icon)!!) {
                             setAnimationResource(R.raw.day_clean)
+                            setBackground(R.drawable.sunny_background)
                         } else {
                             setAnimationResource(R.raw.night_clean)
+                            setBackground(R.drawable.clean_night_background)
                         }
                         "Clouds" -> if (checkLastCharacterForD(it.icon)!!) {
                             setAnimationResource(R.raw.day_cloud)
@@ -100,4 +103,12 @@ class WeatherFragment : Fragment() {
         DecimalFormat("#").format(doubleText?.minus(273.15)).toString() + "°C"
 
     private fun checkLastCharacterForD(stringSequence: String?) = stringSequence?.endsWith("d")
+
+    private fun setBackground(drawableResource: Int) {
+        bindingFragment.mainLayout.background = ResourcesCompat.getDrawable(
+            resources,
+            drawableResource,
+            null
+        )
+    }
 }

@@ -16,7 +16,7 @@
         android:fontFamily="@font/spicy_rice"
         android:gravity="center"
         android:text="@string/weather"
-        android:textColor="@color/grey"
+        android:textColor="@color/black"
         android:textSize="76sp" />
 
     <TextView
@@ -28,5 +28,5 @@
         android:gravity="center"
         android:text="@string/now"
         android:textColor="@color/orange_deep"
-        android:textSize="90sp" />
+        android:textSize="120sp" />
 </LinearLayout>

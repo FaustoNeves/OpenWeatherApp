@@ -16,7 +16,7 @@
         android:fontFamily="@font/spicy_rice"
         android:gravity="center"
         android:text="@string/weather"
-        android:textColor="@color/grey"
+        android:textColor="@color/black"
         android:textSize="76sp" />
 
     <TextView
@@ -28,7 +28,7 @@
         android:gravity="center"
         android:text="@string/now"
         android:textColor="@color/orange_deep"
-        android:textSize="90sp" />
+        android:textSize="120sp" />
 
     <EditText
         android:id="@+id/cityRegionName"
@@ -41,8 +41,8 @@
         android:ems="10"
         android:hint="@string/city_region_name"
         android:inputType="textPersonName"
-        android:textColor="@color/white"
-        android:textColorHint="@color/orange_deep" />
+        android:textColor="@color/black"
+        android:textColorHint="@color/input_hint_color" />
 
     <EditText
         android:id="@+id/countryCode"
@@ -55,8 +55,8 @@
         android:ems="10"
         android:hint="@string/state_code"
         android:inputType="textPersonName"
-        android:textColor="@color/orange_deep"
-        android:textColorHint="@color/orange_deep" />
+        android:textColor="@color/black"
+        android:textColorHint="@color/input_hint_color" />
 
     <Button
         android:id="@+id/getWeather"
