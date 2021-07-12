@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,61 +13,82 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="100sp"
-        android:fontFamily="@font/spicy_rice"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="50dp"
+        android:fontFamily="@font/ubuntu_light"
         android:gravity="center"
         android:text="@string/weather"
         android:textColor="@color/black"
-        android:textSize="76sp" />
+        android:textSize="76sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/main_logo2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:fontFamily="@font/spicy_rice"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:fontFamily="@font/ubuntu_light"
         android:gravity="center"
         android:text="@string/now"
         android:textColor="@color/orange_deep"
-        android:textSize="120sp" />
+        android:textSize="120sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_logo1" />
 
     <EditText
         android:id="@+id/cityRegionName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="50sp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="30dp"
         android:backgroundTint="@color/orange_deep"
         android:ems="10"
         android:hint="@string/city_region_name"
         android:inputType="textPersonName"
         android:textColor="@color/black"
-        android:textColorHint="@color/input_hint_color" />
+        android:textColorHint="@color/input_hint_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_logo2" />
 
     <EditText
         android:id="@+id/countryCode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20sp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
         android:backgroundTint="@color/orange_deep"
         android:ems="10"
         android:hint="@string/state_code"
         android:inputType="textPersonName"
         android:textColor="@color/black"
-        android:textColorHint="@color/input_hint_color" />
+        android:textColorHint="@color/input_hint_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cityRegionName" />
 
     <Button
         android:id="@+id/getWeather"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="65sp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="50dp"
         android:backgroundTint="@color/orange_deep"
         android:text="@string/get_weather"
         android:textAllCaps="false"
-        android:textColor="@color/black" />
-</LinearLayout>
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/countryCode" />
+</androidx.constraintlayout.widget.ConstraintLayout>

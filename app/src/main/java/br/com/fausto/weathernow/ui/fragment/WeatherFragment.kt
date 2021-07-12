@@ -36,7 +36,7 @@ class WeatherFragment : Fragment() {
 //            bindingFragment.currentDate.text = it
 //        })
         splashViewModel.weather.observe(viewLifecycleOwner, { weather ->
-            bindingFragment.let { binding ->
+            bindingFragment.let {
                 weather.weather!![0].let {
                     Log.e("weather", "weather: $it.main!!, day/night: ${it.icon}")
                     when (it.main) {
@@ -48,7 +48,7 @@ class WeatherFragment : Fragment() {
                         "Drizzle", "Rain" -> if (checkLastCharacterForD(it.icon)!!) {
                             setAnimationResource(R.raw.day_rain)
                             setBackgroundColor(R.drawable.snow_day_background)
-                            setTextColor(R.color.black)
+//                            setTextColor(R.color.black)
                         } else {
                             setAnimationResource(R.raw.night_rain)
                             setBackgroundColor(R.drawable.snow_night_background)
@@ -57,7 +57,7 @@ class WeatherFragment : Fragment() {
                         "Snow" -> if (checkLastCharacterForD(it.icon)!!) {
                             setAnimationResource(R.raw.day_snow)
                             setBackgroundColor(R.drawable.snow_day_background)
-                            setTextColor(R.color.black)
+//                            setTextColor(R.color.black)
                         } else {
                             setAnimationResource(R.raw.night_snow)
                             setBackgroundColor(R.drawable.snow_night_background)
@@ -91,8 +91,8 @@ class WeatherFragment : Fragment() {
                 regionName.text = weather.name
                 weatherStatus.text = weather.weather!![0].description
                 currentWeatherText.text = decimalToCelsius(weather.main?.temp)
-                minWeatherText.text = decimalToCelsius(weather.main?.temp_max)
-                maxWeatherText.text = decimalToCelsius(weather.main?.temp_min)
+                minWeatherText.text = decimalToCelsius(weather.main?.temp_min)
+                maxWeatherText.text = decimalToCelsius(weather.main?.temp_max)
                 countryAbbreviation.text = weather.sys?.country
             }.run {
                 bindingFragment.weatherAnimation.playAnimation()
@@ -150,6 +150,7 @@ class WeatherFragment : Fragment() {
                     null
                 )
             )
+            currentWeatherText.setTextColor(resources.getColor(drawableResource, null))
         }
     }
 }

@@ -5,6 +5,7 @@
     android:id="@+id/mainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:background="@drawable/snow_day_background"
     tools:context=".ui.fragment.WeatherFragment">
 
     <!--<TextView
@@ -23,28 +24,31 @@
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/weatherAnimation"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="50dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        />
+        tools:src="@drawable/ic_sun" />
 
     <TextView
         android:id="@+id/countryAbbreviation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:fontFamily="@font/spicy_rice"
-        android:textSize="28sp"
-        android:textColor="@color/black"
+        android:layout_marginStart="5dp"
+        android:fontFamily="@font/ubuntu_light"
+        android:textColor="@color/white"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintHorizontal_bias="0.015"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/regionName"
         tools:text="BR" />
 
     <TextView
@@ -52,19 +56,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        android:fontFamily="@font/spicy_rice"
-        android:textSize="48sp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/ubuntu_light"
         android:gravity="center"
-        android:textColor="@color/black"
         android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="@color/white"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.453"
+        app:layout_constraintHorizontal_bias="0.017"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/countryAbbreviation"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="Liberdade" />
 
     <TextView
@@ -73,95 +75,77 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
-        android:layout_marginBottom="308dp"
+        android:layout_marginBottom="212dp"
+        android:fontFamily="@font/ubuntu_light"
         android:gravity="center"
-        android:textSize="99sp"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
+        android:textSize="120sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.456"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/weatherAnimation"
+        app:layout_constraintVertical_bias="0.407"
         tools:text="24°" />
 
     <TextView
         android:id="@+id/maxWeatherText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="200dp"
+        android:layout_marginStart="150dp"
+        android:layout_marginBottom="50dp"
+        android:textColor="@color/white"
         android:textSize="36sp"
-        android:textColor="@color/black"
+        android:fontFamily="@font/ubuntu_light"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/weatherStatus"
-        app:layout_constraintVertical_bias="0.106"
+        app:layout_constraintVertical_bias="0.344"
         tools:text="26°" />
 
     <TextView
         android:id="@+id/minWeatherText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="200dp"
-        android:layout_marginEnd="50dp"
+        android:layout_marginEnd="150dp"
+        android:layout_marginBottom="50dp"
+        android:textColor="@color/white"
         android:textSize="36sp"
-        android:textColor="@color/black"
+        android:fontFamily="@font/ubuntu_light"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/weatherStatus"
-        app:layout_constraintVertical_bias="0.106"
+        app:layout_constraintVertical_bias="0.344"
         tools:text="21°" />
-
-    <ImageView
-        android:id="@+id/weatherImage"
-        android:layout_width="120sp"
-        android:layout_height="100sp"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        app:layout_constraintBottom_toTopOf="@+id/currentWeatherText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.481"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/regionName"
-        app:layout_constraintVertical_bias="0.37"
-        tools:src="@drawable/ic_sun" />
 
     <TextView
         android:id="@+id/weatherStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="50dp"
         android:layout_marginEnd="50dp"
         android:gravity="center"
         android:textAlignment="center"
+        android:textColor="@color/white"
         android:textSize="36sp"
-        android:textColor="@color/black"
+        android:fontFamily="@font/ubuntu_light"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.46"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/currentWeatherText"
         tools:text="Clear" />
 
-    <LinearLayout
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/searchLayout"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10sp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <TextView
-            android:background="@color/grey_green_to_dark"
-            android:id="@+id/searchAnotherPlace"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text="@string/search_for_another_region"
-            android:textColor="@color/black" />
-    </LinearLayout>
+        app:layout_constraintHorizontal_bias="0.988"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_search" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

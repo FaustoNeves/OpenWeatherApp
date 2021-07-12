@@ -3,5 +3,6 @@
     <array name="preloaded_fonts" translatable="false">
         <item>@font/spicy_rice</item>
         <item>@font/trade_winds</item>
+        <item>@font/ubuntu_light</item>
     </array>
 </resources>
