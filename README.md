@@ -13,9 +13,10 @@ Main topics for its development:
 * [Get the last known location](https://developer.android.com/training/location/retrieve-current) this is how I get the current coordinates. The documentation says "In some rare situations this can be null" but its not that rare. It can happen a lot. In case you are always getting null, restarting your localization on your settings seems to solve it
 * [Permissions on Android](https://developer.android.com/guide/topics/permissions/overview) its good to know how to configure real-time permissions request and how to handle it in case the user doesn't accept it
 
-|<img src="https://user-images.githubusercontent.com/66192808/125524857-b7d81494-bfa7-4dd4-9472-61e4895752c7.gif" width="22%" height="22%"/>
-<img src="https://user-images.githubusercontent.com/66192808/125524854-2c3085e0-70b7-4297-8c13-4bf7d57237ae.gif" width="22%" height="22%"/>
-<img src="https://user-images.githubusercontent.com/66192808/125524855-310221f7-f41a-4271-9210-a87783d2ad78.gif" width="22%" height="22%"/>
-<img src="https://user-images.githubusercontent.com/66192808/125524860-c2450502-f317-4017-89ba-4af32fbfaaa0.gif" width="22%" height="22%"/>
-<img src="https://user-images.githubusercontent.com/66192808/125524848-e9b5ee81-785f-44f7-b5ac-3735551763f9.gif" width="22%" height="22%"/>
-<img src="https://user-images.githubusercontent.com/66192808/125524862-90cf033f-ce5a-4d27-a9cb-60293c052477.gif" width="22%" height="22%"/>|
+|<img src="https://user-images.githubusercontent.com/66192808/125645531-68138639-3745-462d-939d-b0430a1f7906.gif" width="18%" height="22%"/>
+<img src="https://user-images.githubusercontent.com/66192808/125645523-25ad709f-e1b7-4203-8bfe-5df082ec80a0.gif" width="18%" height="22%"/>
+<img src="https://user-images.githubusercontent.com/66192808/125646716-14a48e3f-7eb3-44c8-be2e-9f70d6194683.gif" width="18%" height="22%"/>
+<img src="https://user-images.githubusercontent.com/66192808/125642707-cf4a48d6-f1db-4466-91d1-95c9a56d0058.gif" width="18%" height="22%"/>|
+
+|<img src="https://user-images.githubusercontent.com/66192808/125524848-e9b5ee81-785f-44f7-b5ac-3735551763f9.gif" width="18%" height="22%"/>
+<img src="https://user-images.githubusercontent.com/66192808/125645526-b2be62a5-909c-45dd-a414-018c4f55ea49.gif" width="18%" height="22%"/>|
