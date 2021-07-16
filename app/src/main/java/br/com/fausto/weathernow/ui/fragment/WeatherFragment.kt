@@ -1,11 +1,10 @@
 package br.com.fausto.weathernow.ui.fragment
 
 import android.icu.text.DecimalFormat
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -32,9 +31,6 @@ class WeatherFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        splashViewModel.currentDate.observe(viewLifecycleOwner, {
-//            bindingFragment.currentDate.text = it
-//        })
         splashViewModel.weather.observe(viewLifecycleOwner, { weather ->
             bindingFragment.let {
                 weather.weather!![0].let {
@@ -43,48 +39,38 @@ class WeatherFragment : Fragment() {
                         "Thunderstorm" -> if (checkLastCharacterForD(it.icon)!!) {
                             setAnimationResource(R.raw.heavy_rain)
                             setBackgroundColor(R.drawable.thunderstorm_background)
-                            setTextColor(R.color.white)
                         }
                         "Drizzle", "Rain" -> if (checkLastCharacterForD(it.icon)!!) {
                             setAnimationResource(R.raw.day_rain)
                             setBackgroundColor(R.drawable.snow_day_background)
-//                            setTextColor(R.color.black)
                         } else {
                             setAnimationResource(R.raw.night_rain)
                             setBackgroundColor(R.drawable.snow_night_background)
-                            setTextColor(R.color.white)
                         }
                         "Snow" -> if (checkLastCharacterForD(it.icon)!!) {
                             setAnimationResource(R.raw.day_snow)
                             setBackgroundColor(R.drawable.snow_day_background)
-//                            setTextColor(R.color.black)
                         } else {
                             setAnimationResource(R.raw.night_snow)
                             setBackgroundColor(R.drawable.snow_night_background)
-                            setTextColor(R.color.white)
                         }
                         "Clear" -> if (checkLastCharacterForD(it.icon)!!) {
                             setAnimationResource(R.raw.day_clean)
                             setBackgroundColor(R.drawable.sunny_background)
-                            setTextColor(R.color.white)
                         } else {
                             setAnimationResource(R.raw.night_clean)
                             setBackgroundColor(R.drawable.clean_night_background)
-                            setTextColor(R.color.white)
                         }
                         "Clouds" -> if (checkLastCharacterForD(it.icon)!!) {
                             setAnimationResource(R.raw.day_cloud)
                             setBackgroundColor(R.drawable.cloud_day_background)
-                            setTextColor(R.color.white)
                         } else {
                             setAnimationResource(R.raw.night_cloud)
                             setBackgroundColor(R.drawable.clean_night_background)
-                            setTextColor(R.color.white)
                         }
                         else -> {
                             setAnimationResource(R.raw.mist)
                             setBackgroundColor(R.drawable.mist_background)
-                            setTextColor(R.color.white)
                         }
                     }
                 }
@@ -130,27 +116,24 @@ class WeatherFragment : Fragment() {
         )
     }
 
-    private fun setTextColor(drawableResource: Int) {
-        bindingFragment.countryAbbreviation.setTextColor(
-            resources.getColor(
-                drawableResource,
-                null
-            )
-        )
-        bindingFragment.let {
-            countryAbbreviation.setTextColor(
-                resources.getColor(
-                    drawableResource,
-                    null
-                )
-            )
-            regionName.setTextColor(
-                resources.getColor(
-                    drawableResource,
-                    null
-                )
-            )
-            currentWeatherText.setTextColor(resources.getColor(drawableResource, null))
+    override fun onResume() {
+        super.onResume()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            requireActivity().window.setDecorFitsSystemWindows(false)
+            requireActivity().window.insetsController?.let {
+                it.hide(WindowInsets.Type.statusBars() or WindowInsets.Type.navigationBars())
+                it.systemBarsBehavior =
+                    WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+            }
+        } else {
+            @Suppress("DEPRECATION")
+            requireActivity().window.decorView.systemUiVisibility =
+                (View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                        or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        or View.SYSTEM_UI_FLAG_FULLSCREEN)
         }
     }
 }
