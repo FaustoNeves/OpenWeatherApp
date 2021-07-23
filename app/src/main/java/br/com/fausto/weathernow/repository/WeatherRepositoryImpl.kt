@@ -1,4 +1,4 @@
-package br.com.fausto.weathernow.data.repository
+package br.com.fausto.weathernow.repository
 
 import br.com.fausto.weathernow.data.remote.WeatherRemoteDatasource
 import br.com.fausto.weathernow.http.weatherapi.response.Weather

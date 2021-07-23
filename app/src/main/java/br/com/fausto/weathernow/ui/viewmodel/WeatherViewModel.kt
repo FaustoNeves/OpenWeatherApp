@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import br.com.fausto.weathernow.data.repository.WeatherRepository
+import br.com.fausto.weathernow.repository.WeatherRepository
 import br.com.fausto.weathernow.http.weatherapi.response.Weather
 import br.com.fausto.weathernow.ui.utils.Event
 import dagger.hilt.android.lifecycle.HiltViewModel

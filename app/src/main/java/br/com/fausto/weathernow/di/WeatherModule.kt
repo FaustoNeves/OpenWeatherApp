@@ -2,8 +2,8 @@ package br.com.fausto.weathernow.di
 
 import br.com.fausto.weathernow.data.remote.WeatherRemoteDataSourceImpl
 import br.com.fausto.weathernow.data.remote.WeatherRemoteDatasource
-import br.com.fausto.weathernow.data.repository.WeatherRepository
-import br.com.fausto.weathernow.data.repository.WeatherRepositoryImpl
+import br.com.fausto.weathernow.repository.WeatherRepository
+import br.com.fausto.weathernow.repository.WeatherRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
